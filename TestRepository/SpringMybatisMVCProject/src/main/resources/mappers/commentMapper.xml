@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="Repository.Comment.commentMapper">
+<cache />
+<sql id="basecolumn">
+	COMMENT_NO,CUSER_ID,COMMENT_SUBJECT,COMMENT_CONTENT,REG_DATE
+</sql>
+<insert id="insertComment" parameterType="comment" >
+	insert into comment1(<include refid="basecolumn" />)
+	values(num_seq.nextval,#{cuserId},#{commentSubject},
+	#{commentContent},sysdate)
+</insert>
+<insert id="insertReply" parameterType="reply">
+	insert into reply(reply_no,ruser_id, comment_no, cuser_id,
+	reply_content, reg_Date )
+	values(num_seq.nextval, #{ruserId}, #{commentNo}, #{cuserId}, 
+	#{replyContent}, sysdate)
+</insert>
+
+
+</mapper>
